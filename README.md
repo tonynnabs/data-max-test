@@ -1,14 +1,26 @@
 
-# Foobar
+# Datamax Code Test
 
-Foobar is a Python library for dealing with word pluralization.
+Creating a table from the provided Ice and Fire REST API.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Cloning the git repo
 
 ```bash
-pip install foobar
+git clone https://github.com/tonynnabs/data-max-test.git
+```
+
+Navigate into the created folder, then install composer
+
+```bash
+composer install
+```
+
+Copy ```bash .env.example ``` file to ```bash .env  ``` on the root folder. 
+
+```bash
+cp .env.example .env
 ```
 
 ## Usage
