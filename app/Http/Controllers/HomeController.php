@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -18,12 +19,11 @@ class HomeController extends Controller
         $books = $this->getAllBooks();
         $index_num = ceil($books->count() / $default_page_size);
         return view('home')
-                ->with('books', $books)
+                ->with('books', $this->formatView($books))
                 ->with('index_num', $index_num)
                 ->with('current_page', 1)
                 ->with('page_size',  $default_page_size);
     }
-
 
     /**
      * paginating results
@@ -38,7 +38,7 @@ class HomeController extends Controller
         $books = collect($response);
         $index_num = ceil($this->getAllBooks()->count() / $page_size);
         return view('home')
-                ->with('books', $books)
+                ->with('books', $this->formatView($books))
                 ->with('index_num', $index_num)
                 ->with('current_page', $page_num)
                 ->with('page_size',  $page_size);
@@ -56,5 +56,21 @@ class HomeController extends Controller
         $response = Http::get('https://www.anapioficeandfire.com/api/books')->json();
         $books = collect($response);
         return $books;
+    }
+
+    /**
+     * Formatting author and released date before passing to view
+     *
+     * @param  mixed $books
+     * @return void
+     */
+    public function formatView($books)
+    {
+        return $books->map(function($book){
+            return collect($book)->merge([
+                'authors' => collect($book['authors'])->implode(', '),
+                'released' => Carbon::parse($book['released'])->diffForHumans(),
+            ]);
+        });
     }
 }

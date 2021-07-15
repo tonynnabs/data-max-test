@@ -1,4 +1,5 @@
 <div>
+    <x-loading />
     <div class="justify-end items-center mt-5">
         <div class="flex justify-end items-center">
             <h3 class="mr-3">Search</h3>
@@ -25,10 +26,10 @@
                         <tr>
                             <x-table-data>{{$book['name']}}</x-table-data>
                             <x-table-data>{{$book['isbn']}}</x-table-data>
-                            <x-table-data>{{collect($book['authors'])->implode(', ')}}</x-table-data>
+                            <x-table-data>{{$book['authors']}}</x-table-data>
                             <x-table-data>{{$book['numberOfPages']}}</x-table-data>
                             <x-table-data>{{$book['country']}}</x-table-data>
-                            <x-table-data>{{Carbon\Carbon::parse($book['released'])->diffForHumans()}}</x-table-data>
+                            <x-table-data>{{$book['released']}}</x-table-data>
                         </tr>
                     @endforeach
             </tbody>
