@@ -17,10 +17,30 @@ Navigate into the created folder, then install composer
 composer install
 ```
 
-Copy ```bash .env.example ``` file to ```bash .env  ``` on the root folder. 
+Copy ``` .env.example ```  file to ``` .env  ```  on the root folder. 
 
 ```bash
 cp .env.example .env
+```
+
+Open the ``` .env  ```  file and add database information. 
+
+Generate Application Key. 
+
+```bash
+php artisan key:generate
+```
+
+Migrate database. 
+
+```bash
+php artisan migrate
+```
+
+Start Server. 
+
+```bash
+php artisan serve
 ```
 
 ## Usage
